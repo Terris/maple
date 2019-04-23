@@ -13,6 +13,7 @@ const NewTask = ({ tasklist_id }) => {
         description: description,
         complete: false,
       });
+      setDescription("");
     }
     setEditing(false);
   }

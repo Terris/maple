@@ -13,9 +13,9 @@ const NewTasklist = ({ project_id }) => {
         name: name,
         project_id: project_id,
       });
+      setName("");
     }
     setEditing(false);
-    setName("");
   }
 
   return (
