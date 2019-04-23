@@ -30,6 +30,12 @@ class EditProjectModal extends Component {
 
   }
 
+  handleDelete = () => {
+    if( window.confirm("Are you sure?") ) {
+      db.project(this.props.project_id).remove();
+    }
+  }
+
   render() {
     const { projectName, description, error } = this.state;
     return (
@@ -62,7 +68,8 @@ class EditProjectModal extends Component {
           </Form>
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={this.handleSubmit}>Submit</Button>
+          <Button onClick={this.handleSubmit} color="blue">Submit</Button>
+          <Button onClick={this.handleDelete} icon="delete" color="red" />
         </Modal.Actions>
       </Modal>
     )

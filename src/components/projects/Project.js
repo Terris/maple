@@ -43,6 +43,7 @@ class Project extends Component {
     return (
       <div>
         {loading && <Loader />}
+        {!project && <h2>Select a Project</h2>}
         {project &&
           <div>
             <h2 className="ui left floated header">{project.name}</h2>
