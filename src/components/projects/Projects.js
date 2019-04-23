@@ -52,12 +52,12 @@ class Projects extends Component {
             <NewProjectModal authUser={this.props.authUser} />
           </Grid.Column>
           <Grid.Column width={12}>
-            <Segment>
+
               <Switch>
                 <Route exact path={routes.PROJECT} component={(props) => <Project {...props} />} />
                 <Route exact path={routes.PROJECTS} component={() => <ProjectPlaceholder />} />
               </Switch>
-            </Segment>
+            
           </Grid.Column>
         </Grid>
       </div>

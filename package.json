@@ -12,6 +12,7 @@
     "semantic-ui-react": "^0.86.0"
   },
   "scripts": {
+    "deploy": "npm run build && mv build/index.html build/200.html && surge build https://maple.surge.sh",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

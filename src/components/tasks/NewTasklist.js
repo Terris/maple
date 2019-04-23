@@ -32,7 +32,7 @@ const NewTasklist = ({ project_id }) => {
               onChange={event => setName(event.target.value)}
               onBlur={event => handleSubmit(event)} />
           </form>
-        ) : <Button onClick={() => setEditing(true)} style={{ marginTop: "1em"}}>Add New List</Button>
+        ) : <Button color="green" onClick={() => setEditing(true)} style={{ marginTop: "1em"}}>Add New List</Button>
       }
     </List.Item>
   )

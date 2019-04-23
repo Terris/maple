@@ -4,6 +4,7 @@ import  { db } from '../../firebase';
 
 import EditProjectModal from './EditProjectModal';
 import { Tasklists } from '../tasks';
+import { Timers } from '../timers';
 
 class Project extends Component {
   constructor(props) {
@@ -33,9 +34,9 @@ class Project extends Component {
     const panes = [
       { menuItem: 'Tasks', render: () => <Tab.Pane><Tasklists project_id={this.props.match.params.id} /></Tab.Pane> },
       { menuItem: 'Notes', render: () => <Tab.Pane>Notes</Tab.Pane> },
-      { menuItem: 'Timers', render: () => <Tab.Pane>Timers</Tab.Pane> },
+      { menuItem: 'Timers', render: () => <Tab.Pane><Timers project_id={this.props.match.params.id} /></Tab.Pane> },
     ]
-    return <Tab panes={panes} />
+    return <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
   }
 
   render() {

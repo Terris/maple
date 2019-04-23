@@ -31,7 +31,7 @@ const NewTask = ({ tasklist_id }) => {
               onChange={event => setDescription(event.target.value)}
               onBlur={event => handleSubmit(event)} />
           </form>
-        ) : <Button basic icon='plus' size="mini" onClick={() => setEditing(true)} />
+        ) : <Button fluid basic icon='plus' size="mini" onClick={() => setEditing(true)} />
       }
 
     </List.Item>

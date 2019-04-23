@@ -35,4 +35,10 @@ export const tasklist_task = (tasklist_id, task_id) =>
 // Notes API
 // ----------------------------------
 export const getNotes = () =>
-  db.ref('/notes/').once('value')
+  db.ref('/notes').once('value')
+
+// Timers API
+// ----------------------------------
+
+export const timers = () =>
+  db.ref('/timers')
