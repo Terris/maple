@@ -34,7 +34,7 @@ class NewProjectModal extends Component {
     const { projectName, description, error } = this.state;
     return (
       <Modal
-        trigger={<Button icon onClick={this.handleOpen}><Icon name="plus" /></Button>}
+        trigger={<Button icon onClick={this.handleOpen}><Icon name="plus" /> Add Project</Button>}
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon>

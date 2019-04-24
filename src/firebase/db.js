@@ -42,3 +42,6 @@ export const getNotes = () =>
 
 export const timers = () =>
   db.ref('/timers')
+
+export const timer = (timer_id) =>
+  db.ref(`/timers/${timer_id}`)

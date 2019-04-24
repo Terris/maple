@@ -1,8 +1,9 @@
 import React, { Fragment, Component } from 'react';
 import { db } from '../../firebase';
-import { Loader, Message, Button } from 'semantic-ui-react';
+import { Loader, Message, Table } from 'semantic-ui-react';
 import { mapped } from '../../helpers';
 import Timer from './Timer';
+import NewTimerModal from './NewTimerModal';
 
 class Timers extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class Timers extends Component {
   }
 
   componentWillUnmount() {
-    db.tasklists().off();
+    db.timers().off();
   }
 
   render() {
@@ -37,10 +38,14 @@ class Timers extends Component {
       <Fragment>
         {error && <Message warning>{error}</Message>}
         {loading && <Loader />}
-        {timers && timers.map(timer => {
-          return <Timer key={timer.id} timer={timer} />
-        })}
-        <Button color="green">Add New Timer</Button>
+        <Table>
+          <Table.Body>
+            {timers && timers.map(timer => {
+              return <Timer key={timer.id} timer={timer} />
+            })}
+          </Table.Body>
+        </Table>
+        <NewTimerModal project_id={this.props.project_id} />
       </Fragment>
     )
   }
