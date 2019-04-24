@@ -32,9 +32,9 @@ class Project extends Component {
 
   renderTabs = () => {
     const panes = [
-      { menuItem: 'Tasks', render: () => <Tab.Pane><Tasklists project_id={this.props.match.params.id} /></Tab.Pane> },
-      { menuItem: 'Notes', render: () => <Tab.Pane>Notes</Tab.Pane> },
-      { menuItem: 'Timers', render: () => <Tab.Pane><Timers project_id={this.props.match.params.id} /></Tab.Pane> },
+      { menuItem: 'Tasks', render: () => <Tab.Pane as="div"><Tasklists project_id={this.props.match.params.id} /></Tab.Pane> },
+      { menuItem: 'Notes', render: () => <Tab.Pane as="div">Notes</Tab.Pane> },
+      { menuItem: 'Timers', render: () => <Tab.Pane as="div"><Timers project_id={this.props.match.params.id} /></Tab.Pane> },
     ]
     return <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
   }
@@ -43,7 +43,7 @@ class Project extends Component {
     const { project, loading } = this.state;
     return (
       <div>
-        {loading && <Loader />}
+        {loading && <Loader active />}
         {!project && <h2>Select a Project</h2>}
         {project &&
           <div>

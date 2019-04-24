@@ -32,7 +32,7 @@ class NewTimerModal extends Component {
         start_time: null,
         billable: this.state.billable
       });
-      this.setState({ description: "", billable: false, time: "", modalOpen: false });
+      this.setState({ description: "", billable: false, time: "0.00", modalOpen: false });
     } else { this.setState({error: "Description can't be blank."})}
   }
 

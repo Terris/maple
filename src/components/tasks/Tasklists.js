@@ -35,7 +35,7 @@ class Tasklists extends Component {
     return (
       <Fragment>
         {error && <Message warning>{error}</Message>}
-        {loading && <Loader />}
+        {loading && <Loader active />}
         <List divided>
           {tasklists && Object.keys(tasklists).map(key => {
             return <Tasklist key={key} tasklist_id={key} tasklist={tasklists[key]} />

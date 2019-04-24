@@ -44,7 +44,7 @@ class Projects extends Component {
     return (
       <div>
         {error && <Message warning>{error}</Message>}
-        {loading && <Loader />}
+        {loading && <Loader active />}
         <Grid stackable columns={2}>
           <Grid.Column width={4}>
             <ProjectsMenu projects={projects} />

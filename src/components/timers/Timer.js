@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Table, Button } from 'semantic-ui-react';
+import { Table, Button, Label } from 'semantic-ui-react';
 import { times } from '../../helpers';
 import { db } from '../../firebase';
 
@@ -32,14 +32,21 @@ const StartStopButton = ({ timer }) => {
   )
 }
 
-const Timer = ({ timer }) => {
+const Timer = ({ timer, withHeader }) => {
   return (
-    <Table.Row>
-      <Table.Cell>{timer.description}</Table.Cell>
-      <Table.Cell>{times.durationPlus(timer.start_time, timer.end_time, timer.total_time).toFixed(2)}hrs</Table.Cell>
-      <Table.Cell><StartStopButton timer={timer} /></Table.Cell>
-      <Table.Cell>edit button</Table.Cell>
-    </Table.Row>
+    <Fragment>
+      {!!withHeader &&
+        <Table.Row>
+          <Table.Cell colSpan="4"><Label ribbon>{times.niceDate(timer.date)}</Label></Table.Cell>
+        </Table.Row>
+      }
+      <Table.Row>
+        <Table.Cell>{timer.description}</Table.Cell>
+        <Table.Cell>{parseFloat(timer.total_time).toFixed(2)} hrs</Table.Cell>
+        <Table.Cell><StartStopButton timer={timer} /></Table.Cell>
+        <Table.Cell>edit button</Table.Cell>
+      </Table.Row>
+    </Fragment>
   )
 }
 

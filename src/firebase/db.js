@@ -5,9 +5,6 @@ import { db } from './firebase';
 export const createUser = (id, username, email) =>
   db.ref(`users/${id}`).set({ username, email, })
 
-export const getUsers = () =>
-  db.ref('users').once('value')
-
 // Projects API
 // ----------------------------------
 export const projects = () =>
@@ -34,8 +31,8 @@ export const tasklist_task = (tasklist_id, task_id) =>
 
 // Notes API
 // ----------------------------------
-export const getNotes = () =>
-  db.ref('/notes').once('value')
+export const notes = () =>
+  db.ref('/notes')
 
 // Timers API
 // ----------------------------------

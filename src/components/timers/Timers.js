@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { db } from '../../firebase';
 import { Loader, Message, Table } from 'semantic-ui-react';
-import { mapped } from '../../helpers';
+import { mapped, times } from '../../helpers';
 import Timer from './Timer';
 import NewTimerModal from './NewTimerModal';
 
@@ -33,15 +33,19 @@ class Timers extends Component {
 
   render() {
     const { timers, error, loading } = this.state;
-
+    let lastHeader = null;
     return (
       <Fragment>
         {error && <Message warning>{error}</Message>}
-        {loading && <Loader />}
+        {loading && <Loader active />}
         <Table>
           <Table.Body>
             {timers && timers.map(timer => {
-              return <Timer key={timer.id} timer={timer} />
+              let withHeader = (!lastHeader || lastHeader !== times.niceDate(timer.date)) ? true : false
+              lastHeader = times.niceDate(timer.date);
+              return (
+                <Timer key={timer.id} timer={timer} withHeader={withHeader} />
+              )
             })}
           </Table.Body>
         </Table>
