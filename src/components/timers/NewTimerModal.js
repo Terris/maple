@@ -11,7 +11,8 @@ class NewTimerModal extends Component {
       modalOpen: false,
       description: "",
       billable: false,
-      time: "",
+      time: "0.00",
+      start: false,
       error: null,
     }
   }
@@ -23,18 +24,12 @@ class NewTimerModal extends Component {
   handleSubmit = event => {
     event.preventDefault();
     if (this.state.description !== "") {
-      let startTime = null;
-      let endTime = null;
-      if (this.state.time !== "") {
-        startTime = times.now();
-        endTime = times.nowPlus(this.state.time);
-      }
       db.timers().push({
         project_id: this.props.project_id,
         description: this.state.description,
         date: times.now(),
-        start_time: startTime,
-        end_time: endTime,
+        total_time: this.state.time,
+        start_time: null,
         billable: this.state.billable
       });
       this.setState({ description: "", billable: false, time: "", modalOpen: false });
