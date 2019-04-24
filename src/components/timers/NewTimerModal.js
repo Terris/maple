@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import  * as moment from 'moment';
 import { Modal, Button, Icon, Form, Message } from 'semantic-ui-react';
 import { db } from '../../firebase';
+import { times } from '../../helpers';
 
 
 class NewTimerModal extends Component {
@@ -26,12 +26,13 @@ class NewTimerModal extends Component {
       let startTime = null;
       let endTime = null;
       if (this.state.time !== "") {
-        startTime = moment().format();
-        endTime = moment().add(this.state.time, 'hours').format();
+        startTime = times.now();
+        endTime = times.nowPlus(this.state.time);
       }
       db.timers().push({
         project_id: this.props.project_id,
         description: this.state.description,
+        date: times.now(),
         start_time: startTime,
         end_time: endTime,
         billable: this.state.billable
