@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import { Table, Button, Label } from 'semantic-ui-react';
+import { Table, Button, Icon } from 'semantic-ui-react';
 import { times } from '../../helpers';
 import { db } from '../../firebase';
-
+import EditTimerModal from './EditTimerModal';
 const StartStopButton = ({ timer }) => {
 
   const handleStart = () => {
@@ -37,14 +37,15 @@ const Timer = ({ timer, withHeader }) => {
     <Fragment>
       {!!withHeader &&
         <Table.Row>
-          <Table.Cell colSpan="4"><Label ribbon>{times.niceDate(timer.date)}</Label></Table.Cell>
+          <Table.Cell colSpan="5" active>{times.niceDate(timer.date)}</Table.Cell>
         </Table.Row>
       }
       <Table.Row>
-        <Table.Cell>{timer.description}</Table.Cell>
+        <Table.Cell width={8}>{timer.description}</Table.Cell>
         <Table.Cell>{parseFloat(timer.total_time).toFixed(2)} hrs</Table.Cell>
+        <Table.Cell>{timer.billable ? <Icon name="dollar sign" /> : ""}</Table.Cell>
         <Table.Cell><StartStopButton timer={timer} /></Table.Cell>
-        <Table.Cell>edit button</Table.Cell>
+        <Table.Cell><EditTimerModal timer={timer} /></Table.Cell>
       </Table.Row>
     </Fragment>
   )

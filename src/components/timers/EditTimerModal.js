@@ -4,15 +4,14 @@ import { db } from '../../firebase';
 import { times } from '../../helpers';
 
 
-class NewTimerModal extends Component {
+class EditTimerModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modalOpen: false,
-      description: "",
-      billable: false,
-      time: "0.00",
-      start: false,
+      description: this.props.timer.description,
+      billable: this.props.timer.billable,
+      time: parseFloat(this.props.timer.total_time).toFixed(2),
       error: null,
     }
   }
@@ -24,23 +23,27 @@ class NewTimerModal extends Component {
   handleSubmit = event => {
     event.preventDefault();
     if (this.state.description !== "") {
-      db.timers().push({
-        project_id: this.props.project_id,
+      db.timer(this.props.timer.id).set({
+        ...this.props.timer,
         description: this.state.description,
-        date: times.now(),
         total_time: this.state.time,
-        start_time: null,
-        billable: this.state.billable
+        billable: this.state.billable,
       });
-      this.setState({ description: "", billable: false, time: "0.00", modalOpen: false });
+      this.setState({ modalOpen: false });
     } else { this.setState({error: "Description can't be blank."})}
+  }
+
+  handleDelete = () => {
+    if( window.confirm("Are you sure?") ) {
+      db.timer(this.props.timer.id).remove();
+    }
   }
 
   render() {
     const { description, billable, time, error } = this.state;
     return (
       <Modal
-        trigger={<Button icon onClick={this.handleOpen} color="green"><Icon name="plus" /> Add Timer</Button>}
+        trigger={<Button icon onClick={this.handleOpen}><Icon name="edit" /></Button>}
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon>
@@ -73,10 +76,11 @@ class NewTimerModal extends Component {
         </Modal.Content>
         <Modal.Actions>
           <Button onClick={this.handleSubmit}>Save</Button>
+          <Button onClick={this.handleDelete} icon="delete" color="red" />
         </Modal.Actions>
       </Modal>
     )
   }
 }
 
-export default NewTimerModal;
+export default EditTimerModal;
