@@ -46,12 +46,16 @@ class Tasklists extends Component {
             <NewTasklist project_id={this.props.project_id} />
           </Segment>
         }
+        {!!tasklists.length &&
         <List divided>
           {tasklists && tasklists.map(tasklist => {
             return <Tasklist key={tasklist.id} tasklist={tasklist} />
           })}
-          <NewTasklist project_id={this.props.project_id} />
+          <List.Item>
+            <NewTasklist project_id={this.props.project_id} />
+          </List.Item>
         </List>
+        }
       </Fragment>
     )
   }

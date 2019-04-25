@@ -40,7 +40,7 @@ class NewTimerModal extends Component {
     const { description, billable, time, error } = this.state;
     return (
       <Modal
-        trigger={<Button icon onClick={this.handleOpen} color="green"><Icon name="plus" /> Add Timer</Button>}
+        trigger={<Button onClick={this.handleOpen} color="green">Add New Timer</Button>}
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon>

@@ -48,16 +48,20 @@ class Timers extends Component {
             </Segment.Inline>
           </Segment>
         }
-        <Table>
-          <Table.Body>
-            {timers && timers.map(timer => {
-              let withHeader = (!lastHeader || lastHeader !== times.niceDate(timer.date)) ? true : false
-              lastHeader = times.niceDate(timer.date);
-              return <Timer key={timer.id} timer={timer} withHeader={withHeader} />
-            })}
-          </Table.Body>
-        </Table>
-        <NewTimerModal project_id={this.props.project_id} />
+        {!!timers.length &&
+          <Fragment>
+            <Table>
+              <Table.Body>
+                {timers.map(timer => {
+                  let withHeader = (!lastHeader || lastHeader !== times.niceDate(timer.date)) ? true : false
+                  lastHeader = times.niceDate(timer.date);
+                  return <Timer key={timer.id} timer={timer} withHeader={withHeader} />
+                })}
+              </Table.Body>
+            </Table>
+            <NewTimerModal project_id={this.props.project_id} />
+          </Fragment>
+        }
       </Fragment>
     )
   }

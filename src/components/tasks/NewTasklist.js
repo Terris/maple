@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { db } from '../../firebase';
 import { Button, List, Input } from 'semantic-ui-react';
 
@@ -19,7 +19,7 @@ const NewTasklist = ({ project_id }) => {
   }
 
   return (
-    <List.Item>
+    <Fragment>
       {!!editing
         ? (
           <form onSubmit={event => handleSubmit(event)} className="ui fluid">
@@ -32,9 +32,9 @@ const NewTasklist = ({ project_id }) => {
               onChange={event => setName(event.target.value)}
               onBlur={event => handleSubmit(event)} />
           </form>
-        ) : <Button color="green" onClick={() => setEditing(true)} style={{ marginTop: "1em"}}>Add New List</Button>
+        ) : <Button color="green" onClick={() => setEditing(true)}>Add New List</Button>
       }
-    </List.Item>
+    </Fragment>
   )
 }
 

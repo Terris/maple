@@ -34,6 +34,9 @@ export const tasklist_task = (tasklist_id, task_id) =>
 export const notes = () =>
   db.ref('/notes')
 
+export const note = (note_id) =>
+  db.ref(`/notes/${note_id}`)
+
 // Timers API
 // ----------------------------------
 
