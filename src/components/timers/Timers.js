@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { db } from '../../firebase';
-import { Loader, Message, Table } from 'semantic-ui-react';
+import { Loader, Message, Table, Segment, Header } from 'semantic-ui-react';
 import { mapped, times } from '../../helpers';
 import Timer from './Timer';
 import NewTimerModal from './NewTimerModal';
@@ -38,14 +38,22 @@ class Timers extends Component {
       <Fragment>
         {error && <Message warning>{error}</Message>}
         {loading && <Loader active />}
+        {!timers.length &&
+          <Segment placeholder>
+            <Header icon>
+              Add your first timer.
+            </Header>
+            <Segment.Inline>
+              <NewTimerModal project_id={this.props.project_id} />
+            </Segment.Inline>
+          </Segment>
+        }
         <Table>
           <Table.Body>
             {timers && timers.map(timer => {
               let withHeader = (!lastHeader || lastHeader !== times.niceDate(timer.date)) ? true : false
               lastHeader = times.niceDate(timer.date);
-              return (
-                <Timer key={timer.id} timer={timer} withHeader={withHeader} />
-              )
+              return <Timer key={timer.id} timer={timer} withHeader={withHeader} />
             })}
           </Table.Body>
         </Table>

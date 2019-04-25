@@ -7,7 +7,7 @@ import _ from 'lodash';
 import { db } from '../../firebase';
 
 
-const Tasklist = ({ tasklist, tasklist_id }) => {
+const Tasklist = ({ tasklist }) => {
 	const [editing, setEditing] = useState(false);
 	const [name, setName] = useState(tasklist.name);
 	const tasks = mapped.withId(tasklist.tasks);
@@ -17,7 +17,7 @@ const Tasklist = ({ tasklist, tasklist_id }) => {
 	const handleSubmit = event => {
 		event.preventDefault();
 		if (tasklist.name !== name && name !== "") {
-      db.tasklist(tasklist_id).set({
+      db.tasklist(tasklist.id).set({
         ...tasklist,
         name: name,
       })
@@ -27,7 +27,7 @@ const Tasklist = ({ tasklist, tasklist_id }) => {
 
 	const handleDelete = () => {
 		if (window.confirm("Are you sure?")) {
-			db.tasklist(tasklist_id).remove();
+			db.tasklist(tasklist.id).remove();
 		}
 	}
 
@@ -60,13 +60,13 @@ const Tasklist = ({ tasklist, tasklist_id }) => {
       <List.List>
 				{tasklist && openTasks.map(task => {
 					return (
-						<Task key={task.id} tasklist_id={tasklist_id} task={task} />
+						<Task key={task.id} tasklist_id={tasklist.id} task={task} />
 					)
 				})}
-        <NewTask tasklist_id={tasklist_id} />
+        <NewTask tasklist_id={tasklist.id} />
 				{tasklist && completedTasks.map(task => {
           return (
-            <Task key={task.id} tasklist_id={tasklist_id} task={task} />
+            <Task key={task.id} tasklist_id={tasklist.id} task={task} />
           )
         })}
       </List.List>

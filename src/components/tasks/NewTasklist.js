@@ -22,7 +22,7 @@ const NewTasklist = ({ project_id }) => {
     <List.Item>
       {!!editing
         ? (
-          <form onSubmit={event => handleSubmit(event)}>
+          <form onSubmit={event => handleSubmit(event)} className="ui fluid">
             <Input
               fluid
               size='mini'
