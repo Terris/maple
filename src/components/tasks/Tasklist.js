@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { List, Input, Button } from 'semantic-ui-react';
+import { Table, Input, Button } from 'semantic-ui-react';
 import Task from './Task';
 import NewTask from './NewTask';
 import { mapped } from '../../helpers';
@@ -32,45 +32,46 @@ const Tasklist = ({ tasklist }) => {
 	}
 
   return (
-    <List.Item>
-			&nbsp;
-      <List.Header>
-				{!!editing
-					? (
-						<div>
-							<Button
-								floated="right"
-								size="small"
-								icon="delete"
-								color="red"
-								onClick={() => handleDelete()} />
-							<form onSubmit={event => {handleSubmit(event)}}>
-			          <Input
-			            fluid
-			            size="small"
-			            type="text"
-			            value={name}
-			            onChange={event => {setName(event.target.value)}}
-			            onBlur={event => handleSubmit(event)} />
-			        </form>
-						</div>
-					): <span onClick={() => setEditing(true)}>{tasklist.name}</span>
-				}
-			</List.Header>
-      <List.List>
+    <Table>
+			<Table.Header>
+				<Table.HeaderCell colSpan={2}>
+					{!!editing
+						? (
+							<div>
+								<Button
+									floated="right"
+									size="small"
+									icon="delete"
+									color="red"
+									onClick={() => handleDelete()} />
+								<form onSubmit={event => {handleSubmit(event)}}>
+				          <Input
+				            fluid
+				            size="small"
+				            type="text"
+				            value={name}
+				            onChange={event => {setName(event.target.value)}}
+				            onBlur={event => handleSubmit(event)} />
+				        </form>
+							</div>
+						): <span onClick={() => setEditing(true)}>{tasklist.name}</span>
+					}
+				</Table.HeaderCell>
+			</Table.Header>
+			<Table.Body>
 				{tasklist && openTasks.map(task => {
 					return (
 						<Task key={task.id} tasklist_id={tasklist.id} task={task} />
 					)
 				})}
-        <NewTask tasklist_id={tasklist.id} />
+				<NewTask tasklist_id={tasklist.id} />
 				{tasklist && completedTasks.map(task => {
           return (
             <Task key={task.id} tasklist_id={tasklist.id} task={task} />
           )
         })}
-      </List.List>
-    </List.Item>
+			</Table.Body>
+		</Table>
   )
 }
 

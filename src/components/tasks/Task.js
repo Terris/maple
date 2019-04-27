@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { List, Input } from 'semantic-ui-react';
+import { Table, Input } from 'semantic-ui-react';
 import { db } from '../../firebase';
 
 const Task = ({ task, tasklist_id  }) => {
@@ -49,20 +49,21 @@ const Task = ({ task, tasklist_id  }) => {
   }
 
   return (
-    <List.Item>
-      <div className="ui checkbox fluid" style={{ width: "100%" }}>
+    <Table.Row>
+      <Table.Cell width={1}>
         <input
           type="checkbox"
           name="complete"
           value="complete" checked={task.complete}
           onChange={() => onChangeComplete()} />
+      </Table.Cell>
+      <Table.Cell>
         {!!editing
           ? renderEditing()
           : renderTask()
         }
-
-      </div>
-    </List.Item>
+      </Table.Cell>
+    </Table.Row>
   )
 }
 

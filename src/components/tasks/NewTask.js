@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { List, Button, Input } from 'semantic-ui-react';
+import { Table, Button, Input } from 'semantic-ui-react';
 import { db } from '../../firebase';
 
 const NewTask = ({ tasklist_id }) => {
@@ -19,23 +19,24 @@ const NewTask = ({ tasklist_id }) => {
   }
 
   return (
-    <List.Item>
-      {!!editing
-        ? (
-          <form onSubmit={event => handleSubmit(event)}>
-            <Input
-              fluid
-              size='mini'
-              autoFocus
-              value={description}
-              placeholder="task description"
-              onChange={event => setDescription(event.target.value)}
-              onBlur={event => handleSubmit(event)} />
-          </form>
-        ) : <Button icon='plus' size="mini" content='Add Task' onClick={() => setEditing(true)} />
-      }
-
-    </List.Item>
+    <Table.Row>
+      <Table.Cell colSpan={2}>
+        {!!editing
+          ? (
+            <form onSubmit={event => handleSubmit(event)}>
+              <Input
+                fluid
+                size='mini'
+                autoFocus
+                value={description}
+                placeholder="task description"
+                onChange={event => setDescription(event.target.value)}
+                onBlur={event => handleSubmit(event)} />
+            </form>
+          ) : <Button fluid icon='plus' size="mini" content='Add Task' onClick={() => setEditing(true)} />
+        }
+      </Table.Cell>
+    </Table.Row>
   )
 }
 
