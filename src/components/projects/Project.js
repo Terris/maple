@@ -51,7 +51,6 @@ class Project extends Component {
             <h2 className="ui left floated header">{project.name}</h2>
             <EditProjectModal project={project} project_id={this.props.match.params.id} />
             <Divider clearing />
-            {project.description && <p>{project.description}</p>}
             {this.renderTabs()}
           </div>
         }

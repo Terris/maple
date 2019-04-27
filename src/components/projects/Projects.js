@@ -3,14 +3,12 @@ import { Grid, Message, Loader } from 'semantic-ui-react';
 import { Route, Switch } from 'react-router-dom';
 import Project from './Project';
 import ProjectsMenu from './ProjectsMenu';
+import ProjectsCards from './ProjectsCards';
 import NewProjectModal from './NewProjectModal';
 import { withAuthorization } from '../session';
 import { db } from '../../firebase';
 import { routes } from '../../constants';
 
-const ProjectPlaceholder = () => {
-  return <h2>Select a project</h2>
-}
 
 class Projects extends Component {
 
@@ -53,7 +51,7 @@ class Projects extends Component {
           <Grid.Column width={12}>
               <Switch>
                 <Route exact path={routes.PROJECT} component={(props) => <Project {...props} />} />
-                <Route exact path={routes.PROJECTS} component={() => <ProjectPlaceholder />} />
+                <Route exact path={routes.PROJECTS} component={() => <ProjectsCards projects={projects} />} />
               </Switch>
           </Grid.Column>
         </Grid>
