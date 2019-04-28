@@ -4,7 +4,7 @@ import ProjectCard from './ProjectCard';
 
 const ProjectsCards = ({ projects }) => {
   return (
-    <Card.Group>
+    <Card.Group itemsPerRow={3}>
       {!!projects.length && projects.map(project => {
         return  (
           <ProjectCard key={project.id} project={project} />

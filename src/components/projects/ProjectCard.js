@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Card, Icon } from 'semantic-ui-react';
 import { db } from '../../firebase';
 import { routes } from '../../constants';
@@ -41,7 +42,7 @@ class ProjectCard extends Component {
     const { project } = this.props;
     const { tasks, notes, timers } = this.state;
     return (
-      <Card key={project.id} href={`${routes.PROJECTS}/${project.id}`}>
+      <Card key={project.id} onClick={() => this.props.history.push(`${routes.PROJECTS}/${project.id}`)}>
         <Card.Content
           header={project.name}
           description={project.description}
@@ -56,4 +57,4 @@ class ProjectCard extends Component {
   }
 }
 
-export default ProjectCard;
+export default withRouter(ProjectCard);
