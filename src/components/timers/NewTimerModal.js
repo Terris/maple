@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button, Icon, Form, Message } from 'semantic-ui-react';
+import { Modal, Button, Form, Message } from 'semantic-ui-react';
 import { db } from '../../firebase';
 import { times } from '../../helpers';
 

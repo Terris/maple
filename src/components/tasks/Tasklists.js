@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Message, Loader, List, Segment, Header, } from 'semantic-ui-react';
+import { Message, Loader, Segment, Header, Table, } from 'semantic-ui-react';
 import { db } from '../../firebase';
 import { mapped } from '../../helpers';
 import Tasklist from './Tasklist';
@@ -25,7 +25,6 @@ class Tasklists extends Component {
       .orderByChild('project_id')
       .equalTo(this.props.project_id)
       .on('value', snapshot => this.setState({ tasklists:  mapped.withId(snapshot.val()), loading: false }))
-    console.log(this.state.tasklists);
   }
 
   componentWillUnmount() {
@@ -46,13 +45,19 @@ class Tasklists extends Component {
             <NewTasklist project_id={this.props.project_id} />
           </Segment>
         }
+        {!!tasklists.length && tasklists.map(tasklist => {
+          return <Tasklist key={tasklist.id} tasklist={tasklist} />
+        })}
         {!!tasklists.length &&
-          <div>
-            {tasklists && tasklists.map(tasklist => {
-              return <Tasklist key={tasklist.id} tasklist={tasklist} />
-            })}
-            <NewTasklist project_id={this.props.project_id} />
-          </div>
+          <Table>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell colSpan={2}>
+                  <NewTasklist project_id={this.props.project_id} />
+                </Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+          </Table>
         }
       </Fragment>
     )

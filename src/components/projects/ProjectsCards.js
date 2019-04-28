@@ -1,28 +1,13 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { Card, Icon } from 'semantic-ui-react';
-import { routes } from '../../constants';
+import React from 'react';
+import { Card } from 'semantic-ui-react';
+import ProjectCard from './ProjectCard';
 
 const ProjectsCards = ({ projects }) => {
   return (
     <Card.Group>
-      {!!projects && Object.keys(projects).map(key => {
+      {!!projects.length && projects.map(project => {
         return  (
-          <Card key={key} href={`${routes.PROJECTS}/${key}`}>
-            <Card.Content
-              header={projects[key].name}
-              description={projects[key].description}
-            />
-            <Card.Content extra>
-              <Icon name='tasks' /> # Tasks
-            </Card.Content>
-            <Card.Content extra>
-              <Icon name='sticky note' /> # Notes
-            </Card.Content>
-            <Card.Content extra>
-              <Icon name='clock' /> # Timers
-            </Card.Content>
-          </Card>
+          <ProjectCard key={project.id} project={project} />
         )
       })}
     </Card.Group>

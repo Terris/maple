@@ -16,7 +16,7 @@ const App = () => {
   return (
     <Router>
       <Navigation />
-      <Container style={{ padding: '4em 0em' }}>
+      <Container style={{ padding: '5em 0em' }}>
         <Route exact path={routes.SIGN_IN} component={SignIn} />
         <Route exact path={routes.DASHBOARD} component={Dashboard} />
         <Route exact path={routes.ACCOUNT} component={Account} />

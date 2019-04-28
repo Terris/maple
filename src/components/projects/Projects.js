@@ -8,6 +8,7 @@ import NewProjectModal from './NewProjectModal';
 import { withAuthorization } from '../session';
 import { db } from '../../firebase';
 import { routes } from '../../constants';
+import { mapped } from '../../helpers';
 
 
 class Projects extends Component {
@@ -30,7 +31,7 @@ class Projects extends Component {
     db.projects()
       .orderByChild('user_id')
       .equalTo(this.props.authUser.uid)
-      .on('value', snapshot => this.setState({ projects: snapshot.val(), loading: false }))
+      .on('value', snapshot => this.setState({ projects: mapped.withId(snapshot.val()), loading: false }))
   };
 
   componentWillUnmount() {

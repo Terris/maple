@@ -34,29 +34,31 @@ const Tasklist = ({ tasklist }) => {
   return (
     <Table>
 			<Table.Header>
-				<Table.HeaderCell colSpan={2}>
-					{!!editing
-						? (
-							<div>
-								<Button
-									floated="right"
-									size="small"
-									icon="delete"
-									color="red"
-									onClick={() => handleDelete()} />
-								<form onSubmit={event => {handleSubmit(event)}}>
-				          <Input
-				            fluid
-				            size="small"
-				            type="text"
-				            value={name}
-				            onChange={event => {setName(event.target.value)}}
-				            onBlur={event => handleSubmit(event)} />
-				        </form>
-							</div>
-						): <span onClick={() => setEditing(true)}>{tasklist.name}</span>
-					}
-				</Table.HeaderCell>
+				<Table.Row>
+					<Table.HeaderCell colSpan={2}>
+						{!!editing
+							? (
+								<div>
+									<Button
+										floated="right"
+										size="small"
+										icon="delete"
+										color="red"
+										onClick={() => handleDelete()} />
+									<form onSubmit={event => {handleSubmit(event)}}>
+					          <Input
+					            fluid
+					            size="small"
+					            type="text"
+					            value={name}
+					            onChange={event => {setName(event.target.value)}}
+					            onBlur={event => handleSubmit(event)} />
+					        </form>
+								</div>
+							): <span onClick={() => setEditing(true)}>{tasklist.name}</span>
+						}
+					</Table.HeaderCell>
+				</Table.Row>
 			</Table.Header>
 			<Table.Body>
 				{tasklist && openTasks.map(task => {
