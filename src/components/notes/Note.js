@@ -9,7 +9,7 @@ const Note = ({ note }) => {
         {note.title}
       </Header>
       <Segment attached>
-        {note.content}
+        <NoteEditor content={note.content} />
       </Segment>
     </Fragment>
   )

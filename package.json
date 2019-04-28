@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "draft-js": "^0.10.5",
     "firebase": "^5.10.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",

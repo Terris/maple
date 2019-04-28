@@ -8,6 +8,7 @@ class NewNoteModal extends Component {
     this.state = {
       modalOpen: false,
       title: "",
+      content: "Start writing here...",
       error: null,
     }
   }
@@ -32,7 +33,7 @@ class NewNoteModal extends Component {
     const { title, error } = this.state;
     return (
       <Modal
-        trigger={<Button icon onClick={this.handleOpen}><Icon name="plus" /> Add Note</Button>}
+        trigger={<Button color="green" icon onClick={this.handleOpen}><Icon name="plus" /> Add Note</Button>}
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon>

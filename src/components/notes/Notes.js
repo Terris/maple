@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Segment, Header, Button, Message, Loader } from 'semantic-ui-react';
+import { Segment, Header, Message, Loader } from 'semantic-ui-react';
 import { db } from '../../firebase';
 import { mapped } from '../../helpers';
 import NewNoteModal from './NewNoteModal';
@@ -47,7 +47,8 @@ class Notes extends Component {
             </Segment.Inline>
           </Segment>
         }
-        {notes && notes.map(note => <Note note={note} /> )}
+        {notes && notes.map(note => <Note key={note.id} note={note} /> )}
+        {notes && <Segment><NewNoteModal project_id={this.props.project_id} /></Segment> }
       </Fragment>
     )
   }
