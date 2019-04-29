@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { db } from '../../firebase';
 import { Button, Input } from 'semantic-ui-react';
+import { times } from '../../helpers';
 
 const NewTasklist = ({ project_id }) => {
   const [editing, setEditing] = useState(false);
@@ -12,6 +13,7 @@ const NewTasklist = ({ project_id }) => {
       db.tasklists().push({
         name: name,
         project_id: project_id,
+        created_at: times.now(),
       });
       setName("");
     }

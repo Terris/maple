@@ -3,7 +3,6 @@ import { Modal, Button, Form, Message } from 'semantic-ui-react';
 import { db } from '../../firebase';
 import { times } from '../../helpers';
 
-
 class NewTimerModal extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +29,8 @@ class NewTimerModal extends Component {
         date: times.now(),
         total_time: this.state.time,
         start_time: null,
-        billable: this.state.billable
+        billable: this.state.billable,
+        created_at: times.now(),
       });
       this.setState({ description: "", billable: false, time: "0.00", modalOpen: false });
     } else { this.setState({error: "Description can't be blank."})}

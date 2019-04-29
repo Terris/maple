@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, Icon, Form, Message } from 'semantic-ui-react';
 import { db } from '../../firebase';
-
+import { times } from '../../helpers';
 
 class EditTimerModal extends Component {
   constructor(props) {
@@ -27,6 +27,7 @@ class EditTimerModal extends Component {
         description: this.state.description,
         total_time: this.state.time,
         billable: this.state.billable,
+        updated_at: times.now(),
       });
       this.setState({ modalOpen: false });
     } else { this.setState({error: "Description can't be blank."})}

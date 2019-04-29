@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Table, Button, Input } from 'semantic-ui-react';
 import { db } from '../../firebase';
+import { times } from '../../helpers';
 
 const NewTask = ({ tasklist_id }) => {
   const [editing, setEditing] = useState(false);
@@ -12,6 +13,7 @@ const NewTask = ({ tasklist_id }) => {
       db.tasklist_tasks(tasklist_id).push({
         description: description,
         complete: false,
+        created_at: times.now(),
       });
       setDescription("");
     }

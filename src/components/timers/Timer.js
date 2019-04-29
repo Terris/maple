@@ -19,6 +19,7 @@ const StartStopButton = ({ timer }) => {
       ...timer,
       total_time: totalTime,
       start_time: null,
+      updated_at: times.now(),
     })
   }
 

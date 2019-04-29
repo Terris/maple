@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, Icon, Form, Message } from 'semantic-ui-react';
 import { db } from '../../firebase';
+import { times } from '../../helpers';
 
 class NewProjectModal extends Component {
   constructor(props) {
@@ -23,7 +24,8 @@ class NewProjectModal extends Component {
       db.projects().push({
         name: this.state.projectName,
         description: this.state.description,
-        user_id: this.props.authUser.uid
+        user_id: this.props.authUser.uid,
+        created_at: times.now(),
       });
       this.setState({ projectName: "", description: "", modalOpen: false });
     } else { this.setState({error: "Project name can't be blank."}) }

@@ -5,7 +5,7 @@ import NewTask from './NewTask';
 import { mapped } from '../../helpers';
 import _ from 'lodash';
 import { db } from '../../firebase';
-
+import { times } from '../../helpers';
 
 const Tasklist = ({ tasklist }) => {
 	const [editing, setEditing] = useState(false);
@@ -20,6 +20,7 @@ const Tasklist = ({ tasklist }) => {
       db.tasklist(tasklist.id).set({
         ...tasklist,
         name: name,
+				updated_at: times.now(),
       })
     }
     setEditing(false);

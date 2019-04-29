@@ -3,6 +3,7 @@ import { Button, Divider } from 'semantic-ui-react';
 import NoteDisplay from './NoteDisplay';
 import NoteEditor from './NoteEditor';
 import { db } from '../../firebase';
+import { times } from '../../helpers';
 
 const Note = ({ note }) => {
   const [editing, setEditing] = useState(false);
@@ -11,6 +12,7 @@ const Note = ({ note }) => {
     db.note(note.id).set({
       ...note,
       content: rawContent,
+      updated_at: times.now(),
     }).then(() => setEditing(false) );
   }
 

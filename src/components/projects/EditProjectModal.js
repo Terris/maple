@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form, Message } from 'semantic-ui-react';
 import { db } from '../../firebase';
+import { times } from '../../helpers';
 
 class EditProjectModal extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class EditProjectModal extends Component {
         ...this.props.project,
         name: this.state.projectName,
         description: this.state.description,
+        updated_at: times.now(),
       })
       this.setState({ modalOpen: false });
     } else { this.setState({error: "Project name can't be blank."}) }

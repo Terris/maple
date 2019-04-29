@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form, Message } from 'semantic-ui-react';
 import { db } from '../../firebase';
+import { times } from '../../helpers';
 
 class EditNoteModal extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class EditNoteModal extends Component {
       db.note(this.props.note.id).set({
         ...this.props.note,
         title: this.state.title,
+        updated_at: times.now(),
       });
       this.setState({ title: "", modalOpen: false });
     } else { this.setState({error: "Note name can't be blank."}) }
