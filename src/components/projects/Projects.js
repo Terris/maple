@@ -51,8 +51,8 @@ class Projects extends Component {
           </Grid.Column>
           <Grid.Column width={12}>
               <Switch>
-                <Route exact path={routes.PROJECT} component={(props) => <Project {...props} />} />
                 <Route exact path={routes.PROJECTS} component={() => <ProjectsCards projects={projects} />} />
+                <Route path={routes.PROJECT} component={(props) => <Project {...props} />} />
               </Switch>
           </Grid.Column>
         </Grid>
