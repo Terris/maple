@@ -4,7 +4,6 @@ import { Container } from  'semantic-ui-react';
 
 import Navigation from './navigation';
 import { SignIn } from './auth';
-import Dashboard from './dashboard';
 import { Account } from './user';
 import { Projects } from './projects';
 
@@ -18,7 +17,6 @@ const App = () => {
       <Navigation />
       <Container style={{ padding: '5em 0em' }}>
         <Route exact path={routes.SIGN_IN} component={SignIn} />
-        <Route exact path={routes.DASHBOARD} component={Dashboard} />
         <Route exact path={routes.ACCOUNT} component={Account} />
         <Route path={routes.PROJECTS} component={Projects} />
       </Container>

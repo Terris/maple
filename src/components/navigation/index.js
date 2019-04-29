@@ -25,7 +25,6 @@ const Navigation = (props) => (
 const NavigationAuth = withRouter(
   ({ authUser, history }) => (
     <React.Fragment>
-      <Menu.Item as="a" onClick={() => history.push(routes.DASHBOARD)}>Dashboard</Menu.Item>
       <Menu.Item as="a" onClick={() => history.push(routes.PROJECTS)}>Projects</Menu.Item>
       <Menu.Menu position='right'>
         <Dropdown item simple icon='user'>
