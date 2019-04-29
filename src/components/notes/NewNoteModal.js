@@ -8,7 +8,6 @@ class NewNoteModal extends Component {
     this.state = {
       modalOpen: false,
       title: "",
-      content: "Start writing here...",
       error: null,
     }
   }

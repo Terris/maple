@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Editor, EditorState, RichUtils, getDefaultKeyBinding } from 'draft-js';
+import { Editor, EditorState, RichUtils, getDefaultKeyBinding, convertFromRaw, convertToRaw } from 'draft-js';
 import { Button, Divider } from 'semantic-ui-react';
 import 'draft-js/dist/Draft.css';
 
@@ -95,13 +95,21 @@ const InlineStyleControls = (props) => {
 class NoteEditor extends Component {
   constructor(props) {
     super(props);
-    this.state = {editorState: EditorState.createEmpty()};
+    this.state = { editorState: EditorState.createEmpty() };
     this.focus = () => this.refs.editor.focus();
     this.onChange = (editorState) => this.setState({editorState});
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
     this.mapKeyToEditorCommand = this._mapKeyToEditorCommand.bind(this);
     this.toggleBlockType = this._toggleBlockType.bind(this);
     this.toggleInlineStyle = this._toggleInlineStyle.bind(this);
+  }
+
+  componentDidMount() {
+    if (!!this.props.content) {
+      this.setState({ editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.content))) });
+    } else {
+      this.setState({ editorState: EditorState.createEmpty() });
+    }
   }
 
   handleKeyCommand(command, editorState) {
@@ -146,6 +154,10 @@ class NoteEditor extends Component {
     );
   }
 
+  handleSaveClick = () => {
+    this.props.onSave(JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent())));
+  }
+
   render() {
     const {editorState} = this.state;
     // If the user changes block type before entering any text, we can
@@ -182,6 +194,9 @@ class NoteEditor extends Component {
               ref="editor"
               spellCheck={true} />
           </div>
+          <Divider />
+          <Button icon="check" size="mini" content="Save" color="green"
+            onClick={() => this.handleSaveClick()} />
         </Fragment>
     );
   }

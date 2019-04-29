@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { Segment, Header, Message, Loader } from 'semantic-ui-react';
+import { Segment, Header, Message, Loader, Divider } from 'semantic-ui-react';
 import { db } from '../../firebase';
 import { mapped } from '../../helpers';
 import NewNoteModal from './NewNoteModal';
+import EditNoteModal from './EditNoteModal';
 import Note from './Note';
 
 class Notes extends Component {
@@ -47,7 +48,16 @@ class Notes extends Component {
             </Segment.Inline>
           </Segment>
         }
-        {notes && notes.map(note => <Note key={note.id} note={note} /> )}
+        {notes && notes.reverse().map(note => {
+          return (
+            <Segment key={note.id}>
+              <h3 className="ui left floated header">{note.title}</h3>
+              <EditNoteModal note={note} />
+              <Divider clearing />
+              <Note note={note} />
+            </Segment>
+          )
+        })}
         {notes && <Segment><NewNoteModal project_id={this.props.project_id} /></Segment> }
       </Fragment>
     )

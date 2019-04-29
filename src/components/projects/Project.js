@@ -49,7 +49,7 @@ class Project extends Component {
         {project &&
           <div>
             <h2 className="ui left floated header">{project.name}</h2>
-            <EditProjectModal project={project} project_id={match.params.id} />
+            <EditProjectModal project={project} />
             <Divider clearing />
             <Menu pointing secondary>
               <Menu.Item name='overview' active={!activeItem}

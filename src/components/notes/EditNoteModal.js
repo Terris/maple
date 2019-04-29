@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { Modal, Button, Form, Message } from 'semantic-ui-react';
 import { db } from '../../firebase';
 
-class EditProjectModal extends Component {
+class EditNoteModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modalOpen: false,
-      projectName: this.props.project.name,
-      description: this.props.project.description,
+      title: this.props.note.title,
       error: null,
     }
   }
@@ -19,61 +18,52 @@ class EditProjectModal extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    if (this.state.projectName !== "") {
-      db.project(this.props.project.id).set({
-        ...this.props.project,
-        name: this.state.projectName,
-        description: this.state.description,
-      })
-      this.setState({ modalOpen: false });
-    } else { this.setState({error: "Project name can't be blank."}) }
+    if (this.state.title !== "") {
+      db.note(this.props.note.id).set({
+        ...this.props.note,
+        title: this.state.title,
+      });
+      this.setState({ title: "", modalOpen: false });
+    } else { this.setState({error: "Note name can't be blank."}) }
 
   }
 
   handleDelete = () => {
     if( window.confirm("Are you sure?") ) {
-      db.project(this.props.project.id).remove();
+      db.note(this.props.note.id).remove();
     }
   }
 
   render() {
-    const { projectName, description, error } = this.state;
+    const { title, error } = this.state;
     return (
       <Modal
         trigger={<Button floated="right" icon="setting" size="mini" onClick={this.handleOpen} />}
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon>
-        <Modal.Header>Edit Project</Modal.Header>
+        <Modal.Header>Edit Note</Modal.Header>
         <Modal.Content>
           {error && <Message warning>{error}</Message>}
           <Form onSubmit={event => this.handleSubmit(event)}>
             <Form.Input
               fluid
-              label='Project Name'
-              name='projectName'
-              placeholder='Project Name'
-              value={projectName}
+              label='Note Title'
+              name='title'
+              placeholder='Note Title'
+              value={title}
               onChange={this.handleChange}
               required
-              autoComplete="off" />
-            <Form.Input
-              fluid
-              label='Description'
-              name='description'
-              placeholder='Description'
-              value={description}
-              onChange={this.handleChange}
               autoComplete="off" />
           </Form>
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={this.handleSubmit} color="blue">Submit</Button>
-          <Button onClick={this.handleDelete} color="red" content="Delete Project" />
+          <Button color="green" onClick={this.handleSubmit} content="Submit" />
+          <Button onClick={this.handleDelete} color="red" content="Delete Note" />
         </Modal.Actions>
       </Modal>
     )
   }
 }
 
-export default EditProjectModal;
+export default EditNoteModal;
