@@ -9,9 +9,9 @@ import { Tasklists } from '../tasks';
 import { Notes } from '../notes';
 import { Timers } from '../timers';
 
-const ProjectOverview = () => {
+const ProjectOverview = ({ project }) => {
   return (
-    <h1>Project Overview</h1>
+    <p>{project.description}</p>
   )
 }
 
@@ -62,7 +62,7 @@ class Project extends Component {
                 onClick={() => history.push(`${routes.PROJECTS}/${match.params.id}/timers`)} />
             </Menu>
             <Switch>
-              <Route exact path={routes.PROJECT} component={() => <ProjectOverview />} />
+              <Route exact path={routes.PROJECT} component={() => <ProjectOverview project={project} />} />
               <Route path={routes.PROJECT_TASKS} component={() => <Tasklists project_id={match.params.id} />} />
               <Route path={routes.PROJECT_NOTES} component={() => <Notes project_id={match.params.id} />} />
               <Route path={routes.PROJECT_TIMERS} component={() => <Timers project_id={match.params.id} />} />

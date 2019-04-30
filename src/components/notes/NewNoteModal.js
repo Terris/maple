@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button, Icon, Form, Message } from 'semantic-ui-react';
+import { Modal, Button, Form, Message } from 'semantic-ui-react';
 import { db } from '../../firebase';
 import { times } from '../../helpers';
 
@@ -34,7 +34,7 @@ class NewNoteModal extends Component {
     const { title, error } = this.state;
     return (
       <Modal
-        trigger={<Button color="green" icon onClick={this.handleOpen}><Icon name="plus" /> Add Note</Button>}
+        trigger={<Button color="green" onClick={this.handleOpen} content='Add Note' />}
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon>

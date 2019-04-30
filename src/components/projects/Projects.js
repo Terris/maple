@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Message, Loader } from 'semantic-ui-react';
+import { Grid, Message, Loader, Segment, Header } from 'semantic-ui-react';
 import { Route, Switch } from 'react-router-dom';
 import Project from './Project';
 import ProjectsMenu from './ProjectsMenu';
@@ -50,6 +50,16 @@ class Projects extends Component {
             <NewProjectModal authUser={this.props.authUser} />
           </Grid.Column>
           <Grid.Column width={12}>
+              {!projects.length &&
+                <Segment placeholder>
+                  <Header icon>
+                    Add your first project.
+                  </Header>
+                  <Segment.Inline>
+                    <NewProjectModal authUser={this.props.authUser} />
+                  </Segment.Inline>
+                </Segment>
+              }
               <Switch>
                 <Route exact path={routes.PROJECTS} component={() => <ProjectsCards projects={projects} />} />
                 <Route path={routes.PROJECT} component={(props) => <Project {...props} />} />

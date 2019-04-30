@@ -1,6 +1,8 @@
 export const routes = {
   SIGN_IN: '/signin',
-  DASHBOARD: '/projects',
+  SIGN_UP: '/signup',
+  FORGOT_PASSWORD: '/forgotpassword',
+  RESET_PASSWORD: '/resetpassword',
   ACCOUNT: '/account',
   PROJECTS: '/projects',
   PROJECT: '/projects/:id',

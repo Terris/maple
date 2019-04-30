@@ -27,7 +27,7 @@ const NewTasklist = ({ project_id }) => {
           <form onSubmit={event => handleSubmit(event)} className="ui fluid">
             <Input
               fluid
-              size='mini'
+              size='small'
               autoFocus
               value={name}
               placeholder="tasklist name"

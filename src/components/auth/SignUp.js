@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Container, Form, Button, Message, Divider } from 'semantic-ui-react';
 import { auth } from '../../firebase';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { routes } from '../../constants';
 
-class SignIn extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
       password: "",
+      passwordConfirmation: "",
     }
   }
 
@@ -17,11 +18,13 @@ class SignIn extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    auth.signInWithEmailAndPassword(this.state.email, this.state.password)
-    .then(response => {
-      this.props.history.push(routes.PROJECTS)
-    })
-    .catch(error => this.setState({ error: error.message }))
+    if (this.state.password === this.state.passwordConfirmation) {
+      auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(response => this.props.history.push(routes.PROJECTS))
+      .catch(error => this.setState({ error: error.message }))
+    } else {
+      this.setState({ error: "Passwords do not match." })
+    }
   }
 
   signInWithGoogle = () => {
@@ -31,10 +34,10 @@ class SignIn extends Component {
   }
 
   render() {
-    const {email, password, error} = this.state;
+    const {email, password, passwordConfirmation, error} = this.state;
     return (
-      <Container text style={{ width: "320px"}}>
-        <h1>Sign In</h1>
+      <Container text style={{ width: '320px' }}>
+        <h1>Sign Up</h1>
         {error && <Message warning>{error}</Message>}
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
@@ -52,8 +55,15 @@ class SignIn extends Component {
             placeholder='Password'
             value={password}
             onChange={this.handleChange} />
+          <Form.Input
+            fluid
+            type="password"
+            label='Confirm Password'
+            name="passwordConfirmation"
+            placeholder='Confirm Password'
+            value={passwordConfirmation}
+            onChange={this.handleChange} />
           <Button type='submit'>Submit</Button>
-          <Link to={routes.FORGOT_PASSWORD} style={{ marginLeft: '20px'}}>Forgot your password?</Link>
         </Form>
         <Divider horizontal section>Or</Divider>
         <Button
@@ -63,10 +73,10 @@ class SignIn extends Component {
           color="blue"
           type='button'
           onClick={this.signInWithGoogle}
-          content='Sign In with Google' />
+          content="Sign Up with Google" />
       </Container>
     )
   }
 }
 
-export default withRouter(SignIn);
+export default withRouter(SignUp);

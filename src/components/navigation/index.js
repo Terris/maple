@@ -8,7 +8,7 @@ import { routes } from '../../constants/routes';
 const Navigation = (props) => (
   <Menu inverted fixed="top">
     <Container>
-      <Menu.Item as="a"><strong>Maple</strong></Menu.Item>
+      <Menu.Item><strong>Maple</strong></Menu.Item>
       <AuthUserContext.Consumer>
         {authUser =>
           authUser ? (
@@ -40,6 +40,7 @@ const NavigationAuth = withRouter(
 
 const NavigationNonAuth = () => (
   <Menu.Menu position='right'>
+    <Menu.Item><Link to={routes.SIGN_UP}>Sign Up</Link></Menu.Item>
     <Menu.Item><Link to={routes.SIGN_IN}>Sign In</Link></Menu.Item>
   </Menu.Menu>
 );
