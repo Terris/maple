@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form, Message } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
+import { routes } from '../../constants';
 import { db } from '../../firebase';
 import { times } from '../../helpers';
 
@@ -34,19 +36,23 @@ class EditProjectModal extends Component {
 
   handleDelete = () => {
     if( window.confirm("Are you sure?") ) {
-      db.project(this.props.project.id).remove();
+      db.project(this.props.project.id).remove()
+      .then(() => {
+        this.props.history.push(`${routes.PROJECTS}`)
+      });
     }
   }
 
   render() {
     const { projectName, description, error } = this.state;
+    const { project } = this.props;
     return (
       <Modal
         trigger={<Button floated="right" icon="setting" size="mini" onClick={this.handleOpen} />}
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon>
-        <Modal.Header>Edit Project</Modal.Header>
+        <Modal.Header>Edit Project {project.id}</Modal.Header>
         <Modal.Content>
           {error && <Message warning>{error}</Message>}
           <Form onSubmit={event => this.handleSubmit(event)}>
@@ -78,4 +84,4 @@ class EditProjectModal extends Component {
   }
 }
 
-export default EditProjectModal;
+export default withRouter(EditProjectModal);

@@ -9,3 +9,11 @@ export const withId = (list) => {
   }
   return mapped;
 }
+
+export const toArr = (list) => {
+	const mapped = []
+  for (let item in list) {
+    mapped.push(list[item])
+  }
+  return mapped;
+}

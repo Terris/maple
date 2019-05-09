@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form, Message } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
+import { routes } from '../../constants';
 import { db } from '../../firebase';
 import { times } from '../../helpers';
 
@@ -21,13 +23,18 @@ class NewProjectModal extends Component {
   handleSubmit = event => {
     event.preventDefault();
     if (this.state.projectName !== "") {
-      db.projects().push({
+      let projectKey = db.projects().push().key;
+      db.project(projectKey).set({
+        id: projectKey,
         name: this.state.projectName,
         description: this.state.description,
         user_id: this.props.authUser.uid,
         created_at: times.now(),
+      }).then(response => {
+        this.props.history.push(`${routes.PROJECTS}/${projectKey}`);
+        this.setState({ modalOpen: false, projectName: "", description: "", error: null })
       });
-      this.setState({ projectName: "", description: "", modalOpen: false });
+
     } else { this.setState({error: "Project name can't be blank."}) }
 
   }
@@ -71,4 +78,4 @@ class NewProjectModal extends Component {
   }
 }
 
-export default NewProjectModal;
+export default withRouter(NewProjectModal);

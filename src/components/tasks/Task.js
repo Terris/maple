@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Input } from 'semantic-ui-react';
+import { Grid, Input, Icon } from 'semantic-ui-react';
 import { db } from '../../firebase';
 import { times } from '../../helpers';
 
@@ -7,6 +7,7 @@ const Task = ({ task, tasklist_id  }) => {
   const [editing, setEditing] = useState(false);
   const [description, setDescription] = useState(task.description);
 
+  // Mark task complete
   const onChangeComplete = () => {
     db.tasklist_task(tasklist_id, task.id).set({
       ...task,
@@ -14,6 +15,7 @@ const Task = ({ task, tasklist_id  }) => {
     })
   }
 
+  // Update task
   const handleSubmit = event => {
     event.preventDefault();
     if (task.description !== description && description !== "") {
@@ -32,7 +34,7 @@ const Task = ({ task, tasklist_id  }) => {
         <form onSubmit={event => {handleSubmit(event)}}>
           <Input
             fluid
-            size="mini"
+            size="small"
             type="text"
             value={description}
             onChange={event => {setDescription(event.target.value)}}
@@ -51,21 +53,21 @@ const Task = ({ task, tasklist_id  }) => {
   }
 
   return (
-    <Table.Row>
-      <Table.Cell width={1}>
+    <Grid>
+      <Grid.Column style={{ width: "30px"}}>
         <input
           type="checkbox"
           name="complete"
           value="complete" checked={task.complete}
           onChange={() => onChangeComplete()} />
-      </Table.Cell>
-      <Table.Cell>
+      </Grid.Column>
+      <Grid.Column width={14}>
         {!!editing
           ? renderEditing()
           : renderTask()
         }
-      </Table.Cell>
-    </Table.Row>
+      </Grid.Column>
+    </Grid>
   )
 }
 

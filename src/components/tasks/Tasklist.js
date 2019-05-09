@@ -1,80 +1,48 @@
-import React, { useState } from 'react';
-import { Table, Input, Button } from 'semantic-ui-react';
+import React, { useState, Fragment } from 'react';
+import _ from 'lodash';
+import { Segment, Grid, Button } from 'semantic-ui-react';
+import TasklistHeader from './TasklistHeader';
 import Task from './Task';
 import NewTask from './NewTask';
-import { mapped } from '../../helpers';
-import _ from 'lodash';
-import { db } from '../../firebase';
-import { times } from '../../helpers';
+import CompletedTasks from './CompletedTasks';
+import { mapped, sorted } from '../../helpers';
 
 const Tasklist = ({ tasklist }) => {
-	const [editing, setEditing] = useState(false);
-	const [name, setName] = useState(tasklist.name);
+	const [showArchive, setShowArchive] = useState(false);
 	const tasks = mapped.withId(tasklist.tasks);
-	const openTasks = _.filter(tasks, {complete: false });
-	const completedTasks = _.filter(tasks, { complete: true });
-
-	const handleSubmit = event => {
-		event.preventDefault();
-		if (tasklist.name !== name && name !== "") {
-      db.tasklist(tasklist.id).set({
-        ...tasklist,
-        name: name,
-				updated_at: times.now(),
-      })
-    }
-    setEditing(false);
-	}
-
-	const handleDelete = () => {
-		if (window.confirm("Are you sure?")) {
-			db.tasklist(tasklist.id).remove();
-		}
-	}
+	const openTasks = sorted.byKey(_.filter(tasks, {complete: false }), "order");
+	const completedTasks = sorted.byKey(_.filter(tasks, { complete: true }), "created_at");
 
   return (
-    <Table>
-			<Table.Header>
-				<Table.Row>
-					<Table.HeaderCell colSpan={2}>
-						{!!editing
-							? (
-								<div>
-									<Button
-										floated="right"
-										size="small"
-										icon="delete"
-										color="red"
-										onClick={() => handleDelete()} />
-									<form onSubmit={event => {handleSubmit(event)}}>
-					          <Input
-					            fluid
-					            size="small"
-					            type="text"
-					            value={name}
-					            onChange={event => {setName(event.target.value)}}
-					            onBlur={event => handleSubmit(event)} />
-					        </form>
-								</div>
-							): <span onClick={() => setEditing(true)}>{tasklist.name}</span>
-						}
-					</Table.HeaderCell>
-				</Table.Row>
-			</Table.Header>
-			<Table.Body>
-				{tasklist && openTasks.map(task => {
-					return (
-						<Task key={task.id} tasklist_id={tasklist.id} task={task} />
-					)
-				})}
-				<NewTask tasklist_id={tasklist.id} />
-				{tasklist && completedTasks.map(task => {
-          return (
-            <Task key={task.id} tasklist_id={tasklist.id} task={task} />
-          )
-        })}
-			</Table.Body>
-		</Table>
+    <Segment.Group>
+			<Segment>
+				<TasklistHeader tasklist={tasklist} />
+			</Segment>
+			{tasklist && openTasks.map(task => {
+				return (
+					<Fragment key={task.id}>
+						<Segment key={task.id}>
+							<Task tasklist_id={tasklist.id} task={task} />
+						</Segment>
+					</Fragment>
+				)
+			})}
+			<Segment>
+				<Grid>
+					<Grid.Column floated='left' width={12}>
+						<NewTask tasklist_id={tasklist.id} />
+					</Grid.Column>
+					<Grid.Column floated='right' width={2} textAlign="right">
+						<Button icon='checkmark box' size='mini' active={showArchive ? true : false} onClick={() => setShowArchive(showArchive ? false : true)} />
+					</Grid.Column>
+				</Grid>
+			</Segment>
+			{showArchive &&
+				<Segment>
+					<CompletedTasks tasklist={tasklist} tasks={completedTasks} />
+				</Segment>
+			}
+		</Segment.Group>
   )
 }
 

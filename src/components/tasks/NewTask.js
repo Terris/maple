@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { Table, Button, Input } from 'semantic-ui-react';
+import React, { useState, Fragment} from 'react';
+import { Button, Input } from 'semantic-ui-react';
 import { db } from '../../firebase';
 import { times } from '../../helpers';
 
@@ -21,24 +21,22 @@ const NewTask = ({ tasklist_id }) => {
   }
 
   return (
-    <Table.Row>
-      <Table.Cell colSpan={2}>
-        {!!editing
-          ? (
-            <form onSubmit={event => handleSubmit(event)}>
-              <Input
-                fluid
-                size='mini'
-                autoFocus
-                value={description}
-                placeholder="task description"
-                onChange={event => setDescription(event.target.value)}
-                onBlur={event => handleSubmit(event)} />
-            </form>
-          ) : <Button fluid icon='plus' size="mini" content='Add Task' onClick={() => setEditing(true)} />
-        }
-      </Table.Cell>
-    </Table.Row>
+    <Fragment>
+      {!!editing
+        ? (
+          <form onSubmit={event => handleSubmit(event)}>
+            <Input
+              fluid
+              size='small'
+              autoFocus
+              value={description}
+              placeholder="task description"
+              onChange={event => setDescription(event.target.value)}
+              onBlur={event => handleSubmit(event)} />
+          </form>
+        ) : <Button icon='plus' size="mini" color="green" onClick={() => setEditing(true)} />
+      }
+    </Fragment>
   )
 }
 
