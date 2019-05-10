@@ -11,7 +11,7 @@ class NewTimerModal extends Component {
       description: "",
       billable: false,
       time: "0.00",
-      start: false,
+      startTime: null,
       error: null,
     }
   }
@@ -28,12 +28,19 @@ class NewTimerModal extends Component {
         description: this.state.description,
         date: times.now(),
         total_time: this.state.time,
-        start_time: null,
+        start_time: this.state.startTime,
         billable: this.state.billable,
         created_at: times.now(),
       });
-      this.setState({ description: "", billable: false, time: "0.00", modalOpen: false });
+      this.setState({ description: "", billable: false, time: "0.00", startTime: null, modalOpen: false });
     } else { this.setState({error: "Description can't be blank."})}
+  }
+
+  handleSaveAndStart = (event) => {
+    let startTime = times.now();
+    this.setState({ startTime: startTime }, () => {
+      this.handleSubmit(event);
+    });
   }
 
   render() {
@@ -72,7 +79,8 @@ class NewTimerModal extends Component {
           </Form>
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={this.handleSubmit}>Save</Button>
+          <Button content="Save" color="blue" onClick={this.handleSubmit} />
+          <Button content="start" color="green" icon="stopwatch" onClick={(event) => this.handleSaveAndStart(event)} />
         </Modal.Actions>
       </Modal>
     )

@@ -59,6 +59,9 @@ class Timers extends Component {
                 })}
               </Table.Body>
             </Table>
+            <Segment>
+              Total:
+            </Segment>
             <NewTimerModal project_id={this.props.project_id} />
           </Fragment>
         }

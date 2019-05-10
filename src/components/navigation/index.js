@@ -3,7 +3,7 @@ import { Menu, Dropdown, Container } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
 import { AuthUserContext } from '../session';
 import { auth } from '../../firebase';
-import { routes } from '../../constants/routes';
+import { routes } from '../../constants';
 
 const Navigation = (props) => (
   <Menu inverted fixed="top">

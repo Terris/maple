@@ -15,7 +15,7 @@ class EditTimerModal extends Component {
     }
   }
 
-  handleOpen = () => this.setState({ modalOpen: true })
+  handleOpen = () => this.setState({ modalOpen: true, time: parseFloat(this.props.timer.total_time).toFixed(2) })
   handleClose = () => this.setState({ modalOpen: false })
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
