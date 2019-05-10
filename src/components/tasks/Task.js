@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Input, Icon } from 'semantic-ui-react';
+import { Grid, Input } from 'semantic-ui-react';
 import { db } from '../../firebase';
 import { times } from '../../helpers';
 
