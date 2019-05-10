@@ -77,7 +77,7 @@ const Tasklist = ({ tasklist }) => {
 			<Segment>
 				<Grid>
 					<Grid.Column floated='left' width={12}>
-						<NewTask tasklist_id={tasklist.id} />
+						<NewTask tasklist_id={tasklist.id} last_order={openTasks[openTasks.length -1].order} />
 					</Grid.Column>
 					<Grid.Column floated='right' width={2} textAlign="right">
 						<Button icon='checkmark box' size='mini' active={showArchive ? true : false} onClick={() => setShowArchive(showArchive ? false : true)} />

@@ -3,7 +3,7 @@ import { Button, Input } from 'semantic-ui-react';
 import { db } from '../../firebase';
 import { times } from '../../helpers';
 
-const NewTask = ({ tasklist_id }) => {
+const NewTask = ({ tasklist_id, last_order }) => {
   const [editing, setEditing] = useState(false);
   const [description, setDescription] = useState("");
 
@@ -14,6 +14,7 @@ const NewTask = ({ tasklist_id }) => {
         description: description,
         complete: false,
         created_at: times.now(),
+        order: last_order + 1,
       });
       setDescription("");
     }
