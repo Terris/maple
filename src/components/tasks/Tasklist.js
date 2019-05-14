@@ -23,12 +23,12 @@ const Tasklist = ({ tasklist }) => {
 	const completedTasks = sorted.byKey(_.filter(tasks, { complete: true }), "created_at");
 
 	function onDragEnd(result) {
-		let source = result.source.index;
-		let destination = result.destination.index;
-    // dropped outside the list
+		// dropped outside the list
     if (!result.destination) {
       return;
     }
+    let source = result.source.index;
+		let destination = result.destination.index;
 
 		// Update displaced tasks
 		if ( source < destination) {
@@ -50,34 +50,38 @@ const Tasklist = ({ tasklist }) => {
 				<TasklistHeader tasklist={tasklist} />
 			</Segment>
 			<Segment>
-				<DragDropContext onDragEnd={(result) => onDragEnd(result)}>
-					<Droppable droppableId="droppable">
-						{(provided, snapshot) => (
-							<div {...provided.droppableProps} ref={provided.innerRef}>
-								{tasklist && openTasks.map((task, index) => (
-									<Draggable key={task.id} draggableId={task.id} index={index}>
-										{(provided, snapshot) => (
-											<div
-	                      ref={provided.innerRef}
-	                      {...provided.draggableProps}
-	                      {...provided.dragHandleProps}
-	                      style={getItemStyle( snapshot.isDragging, provided.draggableProps.style)}
-	                    >
-												<Task tasklist_id={tasklist.id} task={task} />
-											</div>
-										)}
-									</Draggable>
-								))}
-								{provided.placeholder}
-							</div>
-						)}
-					</Droppable>
-				</DragDropContext>
+        {!!openTasks.length
+          ? (
+            <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
+              <Droppable droppableId="droppable">
+                {(provided, snapshot) => (
+                  <div {...provided.droppableProps} ref={provided.innerRef}>
+                    {tasklist && openTasks.map((task, index) => (
+                      <Draggable key={task.id} draggableId={task.id} index={index}>
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle( snapshot.isDragging, provided.draggableProps.style)}
+                          >
+                            <Task tasklist_id={tasklist.id} task={task} />
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+          ) : ( <p>Create your first task.</p> )
+        }
 			</Segment>
 			<Segment>
 				<Grid>
 					<Grid.Column floated='left' width={12}>
-						<NewTask tasklist_id={tasklist.id} last_order={openTasks[openTasks.length -1].order} />
+						<NewTask tasklist_id={tasklist.id} last_order={openTasks.length} />
 					</Grid.Column>
 					<Grid.Column floated='right' width={2} textAlign="right">
 						<Button icon='checkmark box' size='mini' active={showArchive ? true : false} onClick={() => setShowArchive(showArchive ? false : true)} />

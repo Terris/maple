@@ -76,7 +76,7 @@ class EditTimerModal extends Component {
         </Modal.Content>
         <Modal.Actions>
           <Button onClick={this.handleSubmit}>Save</Button>
-          <Button onClick={this.handleDelete} icon="delete" color="red" />
+          <Button onClick={this.handleDelete} icon="trash" color="red" />
         </Modal.Actions>
       </Modal>
     )

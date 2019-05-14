@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { db } from '../../firebase';
-import { Loader, Message, Table, Segment, Header } from 'semantic-ui-react';
+import { Loader, Message, Table, Segment, Header, Grid } from 'semantic-ui-react';
 import { mapped, times } from '../../helpers';
 import Timer from './Timer';
 import NewTimerModal from './NewTimerModal';
@@ -29,6 +29,18 @@ class Timers extends Component {
 
   componentWillUnmount() {
     db.timers().off();
+  }
+
+  totals = () => {
+    let total = 0;
+    let billableTotal = 0;
+    for (let timer of this.state.timers) {
+      total += timer.total_time;
+      if ( timer.billable ) {
+        billableTotal += timer.total_time;
+      }
+    }
+    return parseFloat(billableTotal).toFixed(2) + " / " + parseFloat(total).toFixed(2) + " hrs";
   }
 
   render() {
@@ -60,7 +72,14 @@ class Timers extends Component {
               </Table.Body>
             </Table>
             <Segment>
-              Total:
+              <Grid>
+                <Grid.Column width={7}>
+                  Total:
+                </Grid.Column>
+                <Grid.Column width={4}>
+                  {this.totals()}
+                </Grid.Column>
+              </Grid>
             </Segment>
             <NewTimerModal project_id={this.props.project_id} />
           </Fragment>

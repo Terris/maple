@@ -14,7 +14,7 @@ const NewTask = ({ tasklist_id, last_order }) => {
         description: description,
         complete: false,
         created_at: times.now(),
-        order: last_order + 1,
+        order: last_order,
       });
       setDescription("");
     }

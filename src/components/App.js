@@ -9,7 +9,7 @@ import { SignIn } from './auth';
 import { ForgotPassword } from './auth';
 import { Account } from './user';
 import { Projects } from './projects';
-
+import Admin from './admin';
 
 import { withAuthentication } from './session';
 import { routes } from '../constants';
@@ -26,6 +26,7 @@ const App = () => {
         <Route exact path={routes.FORGOT_PASSWORD} component={ForgotPassword} />
         <Route exact path={routes.ACCOUNT} component={Account} />
         <Route path={routes.PROJECTS} component={Projects} />
+        <Route path={routes.ADMIN} component={Admin} />
       </Container>
     </Router>
   )
