@@ -23,7 +23,10 @@ class NoteDisplay extends Component {
 
     return (
         <Fragment>
-          <Editor readOnly={true} editorState={editorState} />
+          {editorState.getCurrentContent().hasText()
+            ? <Editor readOnly={true} editorState={editorState} />
+            : <p>Nothing here yet. Start editing to add text.</p>
+          }
         </Fragment>
     );
   }

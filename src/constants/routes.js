@@ -9,5 +9,6 @@ export const routes = {
   PROJECT_TASKS: '/projects/:id/tasks',
   PROJECT_NOTES: '/projects/:id/notes',
   PROJECT_TIMERS: '/projects/:id/timers',
+  PROJECT_PEOPLE: '/projects/:id/people',
   ADMIN: '/admin',
 }

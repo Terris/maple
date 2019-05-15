@@ -8,6 +8,7 @@ import EditProjectModal from './EditProjectModal';
 import { Tasklists } from '../tasks';
 import { Notes } from '../notes';
 import { Timers } from '../timers';
+import { People } from '../people';
 
 const ProjectOverview = ({ project }) => {
   return (
@@ -60,12 +61,15 @@ class Project extends Component {
                 onClick={() => history.push(`${routes.PROJECTS}/${match.params.id}/notes`)}/>
               <Menu.Item name='timers' active={activeItem === 'timers'}
                 onClick={() => history.push(`${routes.PROJECTS}/${match.params.id}/timers`)} />
+              <Menu.Item name='people' active={activeItem === 'people'}
+                onClick={() => history.push(`${routes.PROJECTS}/${match.params.id}/people`)} />
             </Menu>
             <Switch>
               <Route exact path={routes.PROJECT} component={() => <ProjectOverview project={project} />} />
               <Route path={routes.PROJECT_TASKS} component={() => <Tasklists project_id={match.params.id} />} />
               <Route path={routes.PROJECT_NOTES} component={() => <Notes project_id={match.params.id} />} />
               <Route path={routes.PROJECT_TIMERS} component={() => <Timers project_id={match.params.id} />} />
+              <Route path={routes.PROJECT_PEOPLE} component={() => <People project_id={match.params.id} />} />
             </Switch>
           </div>
         }

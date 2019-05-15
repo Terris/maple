@@ -3,7 +3,7 @@ import Task from './Task';
 
 const CompletedTasks = ({ tasklist, tasks }) => {
   return (
-    tasks.map(task => <Task tasklist_id={tasklist.id} task={task} /> )
+    tasks.map(task => <Task key={task.id} tasklist_id={tasklist.id} task={task} /> )
   )
 }
 
