@@ -53,8 +53,6 @@ class Project extends Component {
             <EditProjectModal project={project} />
             <Divider clearing />
             <Menu pointing secondary>
-              <Menu.Item name='overview' active={!activeItem}
-                onClick={() => history.push(`${routes.PROJECTS}/${match.params.id}`)} />
               <Menu.Item name='tasks' active={activeItem === 'tasks'}
                 onClick={() => history.push(`${routes.PROJECTS}/${match.params.id}/tasks`)} />
               <Menu.Item name='notes' active={activeItem === 'notes'}
@@ -65,7 +63,7 @@ class Project extends Component {
                 onClick={() => history.push(`${routes.PROJECTS}/${match.params.id}/people`)} />
             </Menu>
             <Switch>
-              <Route exact path={routes.PROJECT} component={() => <ProjectOverview project={project} />} />
+              <Route exact path={routes.PROJECT} component={() => <Tasklists project_id={match.params.id} />} />
               <Route path={routes.PROJECT_TASKS} component={() => <Tasklists project_id={match.params.id} />} />
               <Route path={routes.PROJECT_NOTES} component={() => <Notes project_id={match.params.id} />} />
               <Route path={routes.PROJECT_TIMERS} component={() => <Timers project_id={match.params.id} />} />
