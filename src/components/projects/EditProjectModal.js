@@ -52,7 +52,7 @@ class EditProjectModal extends Component {
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon>
-        <Modal.Header>Edit Project {project.id}</Modal.Header>
+        <Modal.Header>Edit Project {project.name}</Modal.Header>
         <Modal.Content>
           {error && <Message warning>{error}</Message>}
           <Form onSubmit={event => this.handleSubmit(event)}>
