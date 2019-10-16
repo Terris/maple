@@ -38,6 +38,7 @@ class Notes extends Component {
       <Fragment>
         {error && <Message warning>{error}</Message>}
         {loading && <Loader active />}
+        {notes && <Segment><NewNoteModal project_id={this.props.project_id} /></Segment> }
         {!notes.length &&
           <Segment placeholder>
             <Header icon>
@@ -58,7 +59,6 @@ class Notes extends Component {
             </Segment>
           )
         })}
-        {notes && <Segment><NewNoteModal project_id={this.props.project_id} /></Segment> }
       </Fragment>
     )
   }
