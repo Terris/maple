@@ -29,6 +29,10 @@ export const tasklist_tasks = (tasklist_id) =>
 export const tasklist_task = (tasklist_id, task_id) =>
   db.ref(`/tasklists/${tasklist_id}/tasks/${task_id}`)
 
+export const order_tasklist_tasks = (tasklist_id) => {
+  console.log(tasklist_tasks(tasklist_id));
+}
+
 // Notes API
 // ----------------------------------
 export const notes = () =>

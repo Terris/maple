@@ -12,6 +12,9 @@ const Task = ({ task, tasklist_id  }) => {
     db.tasklist_task(tasklist_id, task.id).set({
       ...task,
       complete: task.complete ? false : true
+    }).then(() => {
+      // Update task order
+      db.order_tasklist_tasks(tasklist_id);
     })
   }
 
@@ -48,7 +51,7 @@ const Task = ({ task, tasklist_id  }) => {
     return (
       !!task.complete
       ? <label style={{ color: "#cccccc" }}>{task.description}</label>
-      : <label onClick={() => setEditing(true)} style={{ cursor: 'text' }}>{task.description}</label>
+      : <label onClick={() => setEditing(true)} style={{ cursor: 'text' }}>{task.description} {task.order}</label>
     )
   }
 
