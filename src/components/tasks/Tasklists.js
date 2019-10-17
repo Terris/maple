@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Message, Loader, Segment, Header, Table, } from 'semantic-ui-react';
+import { Message, Loader, Segment, Header } from 'semantic-ui-react';
 import { db } from '../../firebase';
 import { mapped } from '../../helpers';
 import Tasklist from './Tasklist';

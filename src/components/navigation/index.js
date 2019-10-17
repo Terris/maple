@@ -29,7 +29,9 @@ const NavigationAuth = withRouter(
       <Menu.Menu position='right'>
         <Dropdown item simple icon='user'>
           <Dropdown.Menu>
-            // <Dropdown.Item as="a" onClick={() => history.push(routes.ACCOUNT)}>Account</Dropdown.Item>
+            {
+              // <Dropdown.Item as="a" onClick={() => history.push(routes.ACCOUNT)}>Account</Dropdown.Item>
+            }
             <Dropdown.Item onClick={auth.signOut}>Sign Out</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

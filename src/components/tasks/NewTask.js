@@ -1,4 +1,4 @@
-import React, { useState, Fragment} from 'react';
+import React, { useState } from 'react';
 import { Input, Grid } from 'semantic-ui-react';
 import { db } from '../../firebase';
 import { times } from '../../helpers';

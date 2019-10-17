@@ -10,12 +10,6 @@ import { Notes } from '../notes';
 import { Timers } from '../timers';
 import { People } from '../people';
 
-const ProjectOverview = ({ project }) => {
-  return (
-    <p>{project.description}</p>
-  )
-}
-
 class Project extends Component {
   constructor(props) {
     super(props);

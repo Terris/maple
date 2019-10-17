@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { Segment, Grid, Icon, Divider } from 'semantic-ui-react';
+import { Segment, Icon, Divider } from 'semantic-ui-react';
 import TasklistHeader from './TasklistHeader';
 import Task from './Task';
 import NewTask from './NewTask';

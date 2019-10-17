@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Button } from 'semantic-ui-react';
+import { Menu } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import { routes } from '../../constants';
 
