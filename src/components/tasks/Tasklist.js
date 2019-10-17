@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { Segment, Grid, Button } from 'semantic-ui-react';
+import { Segment, Grid, Icon, Divider } from 'semantic-ui-react';
 import TasklistHeader from './TasklistHeader';
 import Task from './Task';
 import NewTask from './NewTask';
@@ -45,7 +45,7 @@ const Tasklist = ({ tasklist }) => {
 	}
 
   return (
-    <Segment basic vertical padded>
+    <Segment basic vertical>
 			<TasklistHeader tasklist={tasklist} />
 			{!!openTasks.length
         ? (
@@ -74,15 +74,10 @@ const Tasklist = ({ tasklist }) => {
           </DragDropContext>
         ) : ( <p>Create your first task.</p> )
       }
-			
-			<Grid>
-				<Grid.Column floated='left' width={12}>
-					<NewTask tasklist_id={tasklist.id} last_order={openTasks.length} />
-				</Grid.Column>
-				<Grid.Column floated='right' width={2} textAlign="right">
-					<Button icon='checkmark box' size='mini' active={showArchive ? true : false} onClick={() => setShowArchive(showArchive ? false : true)} />
-				</Grid.Column>
-			</Grid>
+			<NewTask tasklist_id={tasklist.id} last_order={openTasks.length} />
+			<Divider hidden />
+      <Icon link name='archive' onClick={() => setShowArchive(showArchive ? false : true)} />
+      <Divider hidden />
 			{showArchive &&
 				<CompletedTasks tasklist={tasklist} tasks={completedTasks} />
 			}

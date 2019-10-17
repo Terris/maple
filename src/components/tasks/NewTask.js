@@ -1,5 +1,5 @@
 import React, { useState, Fragment} from 'react';
-import { Button, Input } from 'semantic-ui-react';
+import { Input, Grid } from 'semantic-ui-react';
 import { db } from '../../firebase';
 import { times } from '../../helpers';
 
@@ -22,22 +22,30 @@ const NewTask = ({ tasklist_id, last_order }) => {
   }
 
   return (
-    <Fragment>
-      {!!editing
-        ? (
-          <form onSubmit={event => handleSubmit(event)}>
-            <Input
-              fluid
-              size='small'
-              autoFocus
-              value={description}
-              placeholder="task description"
-              onChange={event => setDescription(event.target.value)}
-              onBlur={event => handleSubmit(event)} />
-          </form>
-        ) : <Button basic icon='plus' size="mini" onClick={() => setEditing(true)} />
-      }
-    </Fragment>
+    <Grid>
+      <Grid.Column style={{ width: "30px"}}>
+        <input
+          type="checkbox"
+          disabled
+       />
+      </Grid.Column>
+      <Grid.Column width={14}>
+        {!!editing
+          ? (
+            <form onSubmit={event => handleSubmit(event)}>
+              <Input
+                fluid
+                size='small'
+                autoFocus
+                value={description}
+                placeholder="task description"
+                onChange={event => setDescription(event.target.value)}
+                onBlur={event => handleSubmit(event)} />
+            </form>
+          ) : <label onClick={() => setEditing(true)} style={{ fontStyle: 'italic', cursor: 'text', color: "#cccccc" }}>Create a new task</label>
+        }
+      </Grid.Column>
+    </Grid>
   )
 }
 

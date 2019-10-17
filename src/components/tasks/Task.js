@@ -48,7 +48,7 @@ const Task = ({ task, tasklist_id  }) => {
     return (
       !!task.complete
       ? <label style={{ color: "#cccccc" }}>{task.description}</label>
-      : <label onClick={() => setEditing(true)}>{task.description}</label>
+      : <label onClick={() => setEditing(true)} style={{ cursor: 'text' }}>{task.description}</label>
     )
   }
 
@@ -58,7 +58,8 @@ const Task = ({ task, tasklist_id  }) => {
         <input
           type="checkbox"
           name="complete"
-          value="complete" checked={task.complete}
+          value="complete"
+          checked={task.complete}
           onChange={() => onChangeComplete()} />
       </Grid.Column>
       <Grid.Column width={14}>
