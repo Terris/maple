@@ -1,12 +1,12 @@
 import React from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Button } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import { routes } from '../../constants';
 
 const ProjectsMenu = ({ projects, history, location }) => {
   const activeItem = location.pathname.split('/')[2];
   return (
-    <Menu vertical fluid>
+    <Menu pointing secondary vertical fluid>
       <Menu.Item header as="a" active={!activeItem}
         onClick={() => history.push(routes.PROJECTS)}>Projects</Menu.Item>
       {!!projects.length && projects.map(project => {

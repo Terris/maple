@@ -49,15 +49,7 @@ class Tasklists extends Component {
           return <Tasklist key={tasklist.id} tasklist={tasklist} />
         })}
         {!!tasklists.length &&
-          <Table>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell colSpan={2}>
-                  <NewTasklist project_id={this.props.project_id} />
-                </Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-          </Table>
+          <NewTasklist project_id={this.props.project_id} />
         }
       </Fragment>
     )

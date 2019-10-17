@@ -44,27 +44,28 @@ class Projects extends Component {
       <div>
         {error && <Message warning>{error}</Message>}
         {loading && <Loader active />}
-        <Grid stackable columns={2}>
-          <Grid.Column width={4}>
-            <ProjectsMenu projects={projects} />
-            <NewProjectModal authUser={this.props.authUser} />
-          </Grid.Column>
-          <Grid.Column width={12}>
-              {!projects.length &&
-                <Segment placeholder>
-                  <Header icon>
-                    Add your first project.
-                  </Header>
-                  <Segment.Inline>
-                    <NewProjectModal authUser={this.props.authUser} />
-                  </Segment.Inline>
-                </Segment>
-              }
-              <Switch>
-                <Route exact path={routes.PROJECTS} component={() => <ProjectsCards projects={projects} />} />
-                <Route path={routes.PROJECT} component={(props) => <Project {...props} />} />
-              </Switch>
-          </Grid.Column>
+        <Grid stackable>
+          <Grid.Row>
+            <Grid.Column width={3}>
+              <ProjectsMenu projects={projects} authUser />
+            </Grid.Column>
+            <Grid.Column width={12}>
+                {!projects.length &&
+                  <Segment placeholder>
+                    <Header icon>
+                      Add your first project.
+                    </Header>
+                    <Segment.Inline>
+                      <NewProjectModal authUser={this.props.authUser} />
+                    </Segment.Inline>
+                  </Segment>
+                }
+                <Switch>
+                  <Route exact path={routes.PROJECTS} component={() => <ProjectsCards projects={projects} />} />
+                  <Route path={routes.PROJECT} component={(props) => <Project {...props} />} />
+                </Switch>
+            </Grid.Column>
+          </Grid.Row>
         </Grid>
       </div>
     )

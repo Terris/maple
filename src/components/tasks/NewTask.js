@@ -35,7 +35,7 @@ const NewTask = ({ tasklist_id, last_order }) => {
               onChange={event => setDescription(event.target.value)}
               onBlur={event => handleSubmit(event)} />
           </form>
-        ) : <Button icon='plus' size="mini" color="green" onClick={() => setEditing(true)} />
+        ) : <Button basic icon='plus' size="mini" onClick={() => setEditing(true)} />
       }
     </Fragment>
   )
