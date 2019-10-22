@@ -47,7 +47,7 @@ class Projects extends Component {
         <Grid stackable>
           <Grid.Row>
             <Grid.Column width={3}>
-              <ProjectsMenu projects={projects} authUser />
+              <ProjectsMenu projects={projects} authUser={this.props.authUser} />
             </Grid.Column>
             <Grid.Column width={12}>
                 {!projects.length &&

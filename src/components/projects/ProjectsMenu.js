@@ -12,7 +12,7 @@ const ProjectsMenu = ({ projects, history, location, authUser }) => {
       {!!projects.length && projects.map(project => {
         return <Menu.Item key={project.id} as="a" active={activeItem === project.id} onClick={() => history.push(`${routes.PROJECTS}/${project.id}`)}>{project.name}</Menu.Item>
       })}
-      <Menu.Item><NewProjectModal authUser /></Menu.Item>
+      <Menu.Item><NewProjectModal authUser={authUser} /></Menu.Item>
     </Menu>
   )
 }
