@@ -47,32 +47,30 @@ const Tasklist = ({ tasklist }) => {
   return (
     <Segment basic vertical>
 			<TasklistHeader tasklist={tasklist} />
-			{!!openTasks.length
-        ? (
-          <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
-            <Droppable droppableId="droppable">
-              {(provided, snapshot) => (
-                <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {tasklist && openTasks.map((task, index) => (
-                    <Draggable key={task.id} draggableId={task.id} index={index}>
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={getItemStyle( snapshot.isDragging, provided.draggableProps.style)}
-                        >
-                          <Task tasklist_id={tasklist.id} task={task} />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-        ) : ( <p>Create your first task.</p> )
+			{!!openTasks.length &&
+        <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
+          <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                {tasklist && openTasks.map((task, index) => (
+                  <Draggable key={task.id} draggableId={task.id} index={index}>
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={getItemStyle( snapshot.isDragging, provided.draggableProps.style)}
+                      >
+                        <Task tasklist_id={tasklist.id} task={task} />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       }
 			<NewTask tasklist_id={tasklist.id} last_order={openTasks.length} />
 			<Divider hidden />

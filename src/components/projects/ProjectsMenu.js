@@ -7,7 +7,7 @@ import NewProjectModal from './NewProjectModal';
 const ProjectsMenu = ({ projects, history, location, authUser }) => {
   const activeItem = location.pathname.split('/')[2];
   return (
-    <Menu pointing secondary vertical fluid>
+    <Menu secondary vertical fluid>
       <Menu.Item header as="a" active={!activeItem} onClick={() => history.push(routes.PROJECTS)}>Projects</Menu.Item>
       {!!projects.length && projects.map(project => {
         return <Menu.Item key={project.id} as="a" active={activeItem === project.id} onClick={() => history.push(`${routes.PROJECTS}/${project.id}`)}>{project.name}</Menu.Item>

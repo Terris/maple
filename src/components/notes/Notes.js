@@ -38,7 +38,6 @@ class Notes extends Component {
       <Fragment>
         {error && <Message warning>{error}</Message>}
         {loading && <Loader active />}
-        {notes && <Segment><NewNoteModal project_id={this.props.project_id} /></Segment> }
         {!notes.length &&
           <Segment placeholder>
             <Header icon>
@@ -49,7 +48,7 @@ class Notes extends Component {
             </Segment.Inline>
           </Segment>
         }
-        {notes && notes.reverse().map(note => {
+        {notes && notes.map(note => {
           return (
             <Segment key={note.id}>
               <h3 className="ui left floated header">{note.title}</h3>
@@ -59,6 +58,7 @@ class Notes extends Component {
             </Segment>
           )
         })}
+        {notes && <NewNoteModal project_id={this.props.project_id} /> }
       </Fragment>
     )
   }

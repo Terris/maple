@@ -50,20 +50,20 @@ class Projects extends Component {
               <ProjectsMenu projects={projects} authUser={this.props.authUser} />
             </Grid.Column>
             <Grid.Column width={12}>
-                {!projects.length &&
-                  <Segment placeholder>
-                    <Header icon>
-                      Add your first project.
-                    </Header>
-                    <Segment.Inline>
-                      <NewProjectModal authUser={this.props.authUser} />
-                    </Segment.Inline>
-                  </Segment>
-                }
-                <Switch>
-                  <Route exact path={routes.PROJECTS} component={() => <ProjectsCards projects={projects} />} />
-                  <Route path={routes.PROJECT} component={(props) => <Project {...props} />} />
-                </Switch>
+              {!projects.length &&
+                <Segment placeholder>
+                  <Header icon>
+                    Add your first project.
+                  </Header>
+                  <Segment.Inline>
+                    <NewProjectModal authUser={this.props.authUser} />
+                  </Segment.Inline>
+                </Segment>
+              }
+              <Switch>
+                <Route exact path={routes.PROJECTS} component={() => <ProjectsCards projects={projects} />} />
+                <Route path={routes.PROJECT} component={(props) => <Project {...props} />} />
+              </Switch>
             </Grid.Column>
           </Grid.Row>
         </Grid>
